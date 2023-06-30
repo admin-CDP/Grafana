@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="Webpage description goes here" />
+  <meta charset="utf-8">
+  <title>Grafana embed test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  
+
+
+
+
+  
+</head>
+
+<body>
+  
+  <button id="post-btn">I'm a button</button>
+  
+  
+  <input type="datetime-local" id="from-time"
+  name="from-time" value="2023-01-01T00:01"
+  min="2008-06-07T00:00" max="2023-05-01T00:00">
+
+
+<input type="datetime-local" id="to-time"
+  name="to-time" value="2023-05-01T00:01"
+  min="2008-06-07T00:00" max="2023-05-01T00:00">
+
+  <input type="text" id="company" name="company" value = "CDP">
+
+
+  <iframe id = "iframe_panier" src="http://54.37.8.214:3000/d-solo/c68cc3e7-2322-423a-87df-54d3d9d38bdf/test-fredo?from=1635544800000&to=1675119600000&orgId=1&panelId=123125" width="900" height="400" frameborder="0"></iframe>
+
+  <p id="json">Do not forget to buy carrots today.</p>
+
+
+  <script>
+
+    const button = document.getElementById('post-btn');
+
+    
+
+
+    button.addEventListener('click',
+      rienng);
+    const token = "glsa_v33b8rGej7YYZLwUObcQzRt8U7i8Vi63_0f78b08d";
+
+    
+    function rienng() {
+      var company = document.getElementById('company').value
+      fetch('http://54.37.8.214:8081/var/www/Grafana', {
+        
+        method : "POST",
+        body : JSON.stringify({"company" : company})
+      })
+      .then(response => response.json())
+      .then(data => {
+        const uid = JSON.parse(data.json())['dashboard']['uid'];
+        // Utilisez l'entier reçu comme vous le souhaitez
+      })
+      .catch(error => {
+        console.error('Une erreur s\'est produite :', error);
+        // Gérez les erreurs de requête ici
+      });
+      
+      
+      var from = +new Date(document.getElementById("from-time").value)
+      var to = +new Date(document.getElementById("to-time").value)
+      document.getElementById("iframe_panier").src = "http://54.37.8.214:3000/d-solo/c68cc3e7-2322-423a-87df-54d3d9d38bdf/test-fredo?from="+from+"+&to="+to+"&orgId=1&panelId=123125";
+      
+      var element = document.getElementById("json");
+      element.innerHTML = uid;
+
+
+      
+
+
+
+
+    }
+  </script> 
+
+</body>
+</html>

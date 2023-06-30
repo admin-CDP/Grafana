@@ -7,6 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 token = "glsa_kjmdxYEXOiMPfbp2t1PWVv1zwNqLYF5r_01404515"
 firm = "\"Coup de Pousse\""
+IP_graf = '54.37.8.214'
 
 
 headers = {"Accept": "application/json",
@@ -31,7 +32,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         #Then we get all the dashboards from grafana
 
         try :
-            r = requests.get('http://54.37.8.214:3000/api/search?folderIds=0&query=&starred=false',headers = headers)
+            r = requests.get('http://'+IP_graf+':3000/api/search?folderIds=0&query=&starred=false',headers = headers)
             response = r.json()
 
             for dash in response :
@@ -41,7 +42,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     uid = dash['uid']
             print(uid)
         
-            r = requests.get('http://54.37.8.214:3000/api/dashboards/uid/'+uid, headers = headers)
+            r = requests.get('http://'+IP_graf+':3000/api/dashboards/uid/'+uid, headers = headers)
             print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
             json_dash = r.json()
@@ -55,7 +56,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     object["options"]["filters"][0]["config"]["options"]["value"] = firm
 
 
-            r = requests.post('http://54.37.8.214:3000/api/dashboards/db', headers = headers, json = json_dash)
+            r = requests.post('http://'+IP_graf+':3000/api/dashboards/db', headers = headers, json = json_dash)
             #print(f"Status Code: {r.status_code}, Response: {r.json()}")
         except Exception as e:
             print('Problem during request to grafana database : ',e)
