@@ -1,6 +1,5 @@
 import requests
 import json
-from json_generator import json_generator
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 """Le code est immonde et j'en suis conscient"""
@@ -79,7 +78,7 @@ if __name__ == '__main__':
     
     server_address = ('', 8081)
     httpd = HTTPServer(server_address, RequestHandler)
-    print('Starting server on port 8080...')
+    print('Starting server on port 8081...')
     httpd.serve_forever()
 
 
