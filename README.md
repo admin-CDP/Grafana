@@ -32,11 +32,12 @@ Il faut ensuite, au début du code python renseigner le token récupéré préc�
 
 Reste à lancer le code indéfiniment  :
 
-			nohup python3 server_interface_grafana.py
+		nohup python3 server_interface_grafana.py
 
 Reste à accéder à l'interface via  *index.html* en prenant soin de vérifier l'url du serveur Grafana est bien la bonne dans le "< iframe >" du document html.
 
 # Création de visualisation via Grafana
+
 
 
 # Arrêt du serveur

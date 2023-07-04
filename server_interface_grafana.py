@@ -34,25 +34,29 @@ class RequestHandler(BaseHTTPRequestHandler):
             r = requests.get('http://'+IP_graf+':3000/api/search?folderIds=0&query=&starred=false',headers = headers)
             response = r.json()
 
+            uid = 0
+            new = True
+
             for dash in response :
                 print(dash['title'])
                 print(firm)
                 if firm in dash['title']:
                     uid = dash['uid']
-            print(uid)
+                    new = False
+            if uid == 0:
+                uid = response[0]['uid']
         
             r = requests.get('http://'+IP_graf+':3000/api/dashboards/uid/'+uid, headers = headers)
             print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
             json_dash = r.json()
-
-            json_dash['dashboard']['id'] = None
-            json_dash['dashboard']['uid'] = None
-            json_dash['dashboard']['title'] = 'test_'+firm
-            for object in json_dash['dashboard']["panels"][0]["transformations"]:
-                if object["id"]=='filterByValue' and object["options"]["filters"][0]["fieldName"] == "Company":
-                    print("oui")
-                    object["options"]["filters"][0]["config"]["options"]["value"] = firm
+            if new:
+                json_dash['dashboard']['id'] = None
+                json_dash['dashboard']['uid'] = None
+                json_dash['dashboard']['title'] = 'test_'+firm
+                for object in json_dash['dashboard']["panels"][0]["transformations"]:
+                    if object["id"]=='filterByValue' and object["options"]["filters"][0]["fieldName"] == "Company":
+                        object["options"]["filters"][0]["config"]["options"]["value"] = firm
 
 
             r = requests.post('http://'+IP_graf+':3000/api/dashboards/db', headers = headers, json = json_dash)
