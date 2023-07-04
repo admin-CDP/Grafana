@@ -69,7 +69,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         try : 
             processed_data = {'received_data': json_dash}
             self.send_response(200)
-            self.send_header('Content-type', 'application/json')#, 'Access-Control-Allow-Origin', 'http://89.82.239.21')
+            self.send_header('Content-type', 'application/json', 'Access-Control-Allow-Origin', 'http://89.82.239.21')
             self.end_headers()
             self.wfile.write(json.dumps(processed_data).encode('utf-8'))
             print('OUI')
