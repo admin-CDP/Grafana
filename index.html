@@ -58,7 +58,7 @@
       })
       .then(response => response.json())
       .then(data => {
-        const uid = JSON.parse(data.json())['dashboard']['uid'];
+        const uid = data
         var from = +new Date(document.getElementById("from-time").value);
         var to = +new Date(document.getElementById("to-time").value);
         document.getElementById("iframe_panier").src = "http://54.37.8.214:3000/d-solo/c68cc3e7-2322-423a-87df-54d3d9d38bdf/test-fredo?from="+from+"+&to="+to+"&orgId=1&panelId=123125";

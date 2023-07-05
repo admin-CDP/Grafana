@@ -72,7 +72,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', 'http://86.207.9.98')
             self.end_headers()
-            self.wfile.write(json.dumps(processed_data).encode('utf-8'))
+            self.wfile.write(str(uid))
             print('OUI')
 
         except Exception as e:
