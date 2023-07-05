@@ -46,7 +46,8 @@
 
     button.addEventListener('click',
       rienng);
-    const token = "glsa_v33b8rGej7YYZLwUObcQzRt8U7i8Vi63_0f78b08d";
+    button.addEventListener('click',
+      rienng);
 
     
     function rienng() {
@@ -58,10 +59,12 @@
       })
       .then(response => response.json())
       .then(data => {
-        const uid = data
+        var uid = data['received_data']['dashboard']['uid']
+        var id = data['received_data']['dashboard']['id']
+        var title  = data['received_data']['dashboard']['title']
         var from = +new Date(document.getElementById("from-time").value);
         var to = +new Date(document.getElementById("to-time").value);
-        document.getElementById("iframe_panier").src = "http://54.37.8.214:3000/d-solo/c68cc3e7-2322-423a-87df-54d3d9d38bdf/test-fredo?from="+from+"+&to="+to+"&orgId=1&panelId=123125";
+        document.getElementById("iframe_panier").src = "http://54.37.8.214:3000/d-solo/"+uid+"/"+title+"?from="+from+"+&to="+to+"&orgId=1&panelId=123125";
       
         var element = document.getElementById("json");
         element.innerHTML = uid;
