@@ -1,7 +1,7 @@
 import requests
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
+import argparse
 """Le code est immonde et j'en suis conscient"""
 
 token = "glsa_kjmdxYEXOiMPfbp2t1PWVv1zwNqLYF5r_01404515"
@@ -74,6 +74,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(processed_data).encode('utf-8'))
             print('OUI')
+
+            return 
 
         except Exception as e:
             print('Error while retriving information to the client',e)
